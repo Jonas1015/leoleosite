@@ -1,0 +1,317 @@
+{% extends 'main/base2.html' %}
+{% load static %}
+{% block title %}Admin Books{% endblock title %}
+{% block content %}
+<div class="product col-xs-10 col-lg-10 col-md-10 offset-1 col-sm-12 mt-5 mb-5">
+  <div class="container-fluid tm-mt-big  mt-5 pt-3">
+    <div class="row mt-2">
+      <div class="col-md-12">
+        <div class="message w3-center mt-5">
+          <div class="message_column">
+            {% if messages %}
+              {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show w3-animate-top" role="alert">
+                  {{message}}
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+              {% endfor %}
+            {% endif %}
+        </div>
+      </div>
+    </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 col-sm-12  mt-5">
+        <div class="card-content w3-card mb-5 p-4">
+          <h1>Books</h1>
+          <a href="#" class="btn btn-outline-info mb-4" data-toggle="modal" data-target="#formModal">Add Book</a>
+
+          <!-- Modal -->
+          <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="formModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title text-dark" id="formModalLabel">Add Book</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form class="col-xs-12 col-lg-12 col-md-12 col-sm-12" action="{% url 'add-book' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                      <div class="form-group">
+                        <label for=""> Book Name*</label>
+                        <input type="text" class="form-control" name="name" value="" required>
+                      </div>
+                      <div class="form-group">
+                        <label for="">Category*</label>
+                        <input type="text" list="categories_list" class="form-control" name="category" required>
+                        <datalist id="categories_list">
+                          {% for category in categories %}
+                            <option value="{{ category.name }}">
+                          {% endfor %}
+                        </datalist>
+                      </div>
+                      <div class="form-group">
+
+                      <div class="form-group">
+                        <label for="">Description*</label>
+                        <textarea name="description" class="form-control" style="max-height: 300px; min-height: 200px;"  required>
+                        </textarea>
+                      </div>
+                      <div class="form-group">
+                        <label for=""> Author*</label>
+                        <input type="text" class="form-control" name="author" value="" required>
+                      </div>
+                      <div class="form-group">
+                        <label for=""> Publisher*</label>
+                        <input type="text" class="form-control" name="publisher" value="" required>
+                      </div>
+                      <div class="form-group">
+                        <label for=""> Year*</label>
+                        <input type="text" class="form-control" name="year" value="" required>
+                      </div>
+                      <div class="form-group">
+                        <label for=""> ISBN Number*</label>
+                        <input type="text" class="form-control" name="isbn" value="" >
+                      </div>
+                      <div class="form-group">
+                        <label for="">Image *</label>
+                        <input type="file" accept="image/*" class="form-control" name="image" value="" required>
+                      </div>
+                      <div class="form-group">
+                        <label for="">Book File</label>
+                        <input type="file" accept="pdf/*" class="form-control" name="book_file" value="" required>
+                      </div>
+                      <div id="div_id_to_be_sold" class="form-check">
+                        <input type="checkbox" name="to_be_sold" class="checkboxinput form-check-input" id="id_still_instock">
+                        <label for="to_be_sold" class="form-check-label">To be sold</label>
+                      </div>
+                      <div id="div_id_is_popular" class="form-check">
+                        <input type="checkbox" name="is_popular" class="checkboxinput form-check-input" id="id_is_popular">
+                        <label for="is_popular" class="form-check-label">Is Popular</label>
+                      </div>
+                      <button type="submit" class="btn btn-outline-info mt-3">Add Book</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table id="table" class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Publisher</th>
+                <th>Year</th>
+                <th>ISBN</th>
+                <th class="w3-hide-small">Description</th>
+                <th>To be Sold</th>
+                <th>Is Popular</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% if books %}
+              {% for book in books %}
+                  <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ book.name }}</td>
+                    <td>{{ book.category.name }}</td>
+                    <td>{{ book.Publisher }}</td>
+                    <td>{{ book.year }}</td>
+                    <td>{{ book.isbn }}</td>
+                    <td class="w3-hide-small">{{ book.description }}</td>
+                    <td>
+                      {% if book.to_be_sold %}
+                        <i class="fa fa-check text-success"></i>
+                      {% else %}
+                        <i class="fa fa-times text-danger"></i>
+                      {% endif %}
+                    </td>
+                    <td>
+                      {% if book.is_popular %}
+                        <i class="fa fa-check text-success"></i>
+                      {% else %}
+                        <i class="fa fa-times text-danger"></i>
+                      {% endif %}
+                    </td>
+                    <td>
+                      <a href="#" class="btn btn-outline-primary" data-toggle="modal" data-target="#updateBook{{book.id}}"><i class="fa fa-edit"></i></a>
+                      <a href="#" class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteBook{{book.id}}"><i class="fa fa-trash"></i></a>
+                    </td>
+                  </tr>
+
+                  <!-- update Modal -->
+                  <div class="modal fade" id="updateBook{{book.id}}" tabindex="-1" aria-labelledby="updateBookLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title text-dark" id="updateBookLabel">Update Book</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <form class="" action="{% url 'update-book' book.id %}" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="form-group">
+                              <label for="">Name*</label>
+                              <input type="text" class="form-control" name="name" value="{{ book.name }}" required>
+                            </div>
+                            <div class="form-group">
+                              <label for="">Category*</label>
+                              <input type="text" list="categories_list" class="form-control" name="category" value="{{ book.category.name}}" required>
+                              <datalist>
+                                {% for category in categories %}
+                                  <option value="{{ category.name }}">
+                                {% endfor %}
+                              </datalist>
+                            </div>
+                            <div class="form-group">
+                              <label for="description">Description*</label>
+                              <textarea name="description" class="form-control" style="max-height: 300px; min-height: 200px;"   required>
+                                {{ book.description }}
+                              </textarea>
+                            </div>
+                            <div class="form-group">
+                              <label for="">Author*</label>
+                              <input type="text" class="form-control" name="author" value="{{ book.author }}" required>
+                            </div>
+                            <div class="form-group">
+                              <label for="">Publisher*</label>
+                              <input type="text" class="form-control" name="publisher" value="{{ book.publisher }}" required>
+                            </div>
+                            <div class="form-group">
+                              <label for="year">Year*</label>
+                              <input type="number" class="form-control" name="year" value="{{ book.year }}" required>
+                            </div>
+                            <div class="form-group">
+                              <label for="">ISBN Number</label>
+                              <input type="text" class="form-control" name="isbn" value="{{ book.isbn }}">
+                            </div>
+                            <div class="form-group">
+                              <p class="file-upload">Currently: <a href="{{ book.image.url }}" target="_blank"> {{book.image.name}}</a><br>
+
+                              <label for="image">Change Image</label>
+                              <input type="file" accept="image/*" class="form-control" name="image">
+                            </div>
+
+                            <div class="form-group">
+                              <p class="file-upload">Currently: <a href="{{ book.file.url }}" target="_blank" >{{ book.file.name }}</a><br>
+                              <label for="">Book File</label>
+                              <input type="file" accept="pdf/*" class="form-control" name="book_file" value="">
+                            </div>
+
+                            <div id="div_id_still_instock" class="form-check">
+                              <input type="checkbox" name="to_be_sold" class="checkboxinput form-check-input" id="id_to_be_sold" {% if book.to_be_sold %} checked {% endif %}>
+                              <label for="id_still_instock" class="form-check-label">To be Sold</label>
+                            </div>
+                            <div id="div_id_is_popular" class="form-check">
+                              <input type="checkbox" name="is_popular" class="checkboxinput form-check-input" id="id_is_popular" {% if book.is_popular %} checked {% endif %}>
+                              <label for="is_popular" class="form-check-label">Is Popular</label>
+                            </div>
+                            <div class="form-group mt-3">
+                              <a class="btn btn-danger" style="color: #fff;" data-dismiss="modal">Cancel</a>
+                              <button type="submit" class="btn button">click to save book</button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- delete Modal -->
+                  <div class="modal fade" id="deleteBook{{book.id}}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="deleteproductLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="deleteproductLabel">Confirm Book Deletion</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <p>Are you sure, you want to delete {{ book.name }}?</p>
+                        </div>
+                        <div class="p-4">
+                          <button type="button" class="btn button" data-dismiss="modal"">Cancel</button>
+                          <a href="{% url 'delete-book' book.id %}" class="btn btn-outline-danger">Yes, continue</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {% endfor %}
+                {% else %}
+                  <tr>
+                    <td colspan="9" class="text-center"><strong>NO DATA LOADED</strong></td>
+                  </tr>
+                {% endif %}
+              </tbody>
+            </table>
+          </div>
+
+        <!-- Paginator -->
+        <div class="tm-paginator">
+        {% if books.has_other_pages %}
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-xs-12 col-lg-12 col-md-12 col-sm-12">
+                <div aria-label="Page navigation example" class="paginator">
+                  <ul class="pagination ml-5">
+                    {% if books.has_previous %}
+                      <li class="page-item"><a href="?page={{ books.previous_page_number }}" class="page-link">Previous</a></li>
+                    {% else %}
+                      <li class="disabled page-item"><a href="#" class="page-link">Previous</a></li>
+                    {% endif %}
+
+                    {% for i in books.paginator.page_range %}
+                      {% if books.number == i %}
+                        <li class="active page-item"><span class="page-link">{{ i }} <span class="sr-only">(current)</span></span></li>
+                      {% else %}
+                        <li class="page-item"><a href="?page={{ i }}" class="page-link">{{ i }}</a></li>
+                      {% endif %}
+                    {% endfor %}
+
+                    {% if books.has_next %}
+                      <li class="page-item"><a href="?page={{ books.next_page_number }}" class="page-link">Next</a></li>
+                    {% else %}
+                      <li class="disabled page-item"><a href="#" class="page-link">Next</a></li>
+                    {% endif %}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+      </div>
+    </div>
+    </div>
+  </div>
+ </div>
+</div>
+{% endblock %}
+
+
+
+<!-- {% block js %}
+  <script type="text/javascript" src="{% static 'js/datatables.min.jd' %}"></script>
+  <script type="text/javascript">
+  // Data table
+    $(document).ready(function(){
+      $('#table').DataTable({
+        dom: 'B<"clear">lfrtip',
+        button: {
+          name: 'primary',
+          button: ['copy', 'csv', 'excel', 'pdf']
+        }
+      });
+    });
+  </script>
+
+{% endblock%} -->

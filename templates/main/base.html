@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'helpers/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'helpers/fontawesome/fontawesome-all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'helpers/bootstrap/bootstrap-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'helpers/css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'helpers/css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'helpers/css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'helpers/css/w3.css' %}">
+    <link rel="stylesheet" href="{% static 'helpers/css/bxicons.css' %}">
+    <title>Leoleo Library | {% block title %}{% endblock title %}</title>
+
+</head>
+<body>
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">LOGO</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item active">
+                      <a href="{% url 'home' %}" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="{% url 'books' %}" class="nav-link">Books</a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="{% url 'about' %}" class="nav-link">About</a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="{% url 'contact' %}" class="nav-link">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="{% url 'allBooks' %}" class="nav-link">Add Books</a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="{% url 'allCategories' %}" class="nav-link">Categories</a>
+                    </li>
+                </ul>
+                {% block search %}{% endblock search %}
+            </div>
+        </div>
+    </nav>
+
+
+    {% block content %}{% endblock content %}
+
+
+    <!-- Footer -->
+    <footer class="text-center text-lg-start bg-light text-muted">
+
+      {% block footer %}{% endblock footer %}
+      <!-- Copyright -->
+      <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+          Copyright © <script>document.write(new Date().getFullYear());</script>
+          <a class="text-reset fw-bold" href="#">SmartMind Dev.</a>
+      </div>
+      <!-- Copyright -->
+    </footer>
+    <!-- Footer -->
+
+    <script src="{% static 'helpers/js/jquery.js' %}"></script>
+    <script src="{% static 'js/jquery-3.2.1.slim.min.js' %}"></script>
+    <script src="{% static 'helpers/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'helpers/fontawesome/all.min.js' %}"></script>
+    <script src="{% static 'helpers/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'helpers/js/scripts.js' %}"></script>
+    <script src="{% static 'helpers/js/aos.js' %}"></script>
+    {% block js %}{% endblock %}
+</body>
+</html>

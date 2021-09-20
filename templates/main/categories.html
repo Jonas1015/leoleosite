@@ -1,0 +1,134 @@
+{%  extends 'main/base.html' %}
+{% block title  %} Homepage {% endblock title  %}
+{% load static %}
+{% block content  %}
+
+    <div class="container categories-container p-0 mt-5 mb-5">
+      <div class="header mb-4">
+          <h2 class="text-center">ALL CATEGORIES</h2>
+      </div>
+      {% if categories %}
+      <div class="row row-cols-2 row-cols-lg-4 row-cols-md-3 g-4 all-categories">
+        {% for category in categories %}
+        <a href="{% url 'category-books' category.id %}" class="mb-4">
+          <div class="col">
+              <div class="category">
+                <img src="{{category.image.url}}" class="category-list" alt="{{category.name}}">
+                <h5 class="text-center">{{category.name|title}}</h5>
+            </div>
+          </div>
+        </a>
+        {% endfor %}
+        </div>
+        {% else %}
+        <div class="row row-cols-2 row-cols-lg-4 row-cols-md-3 g-4 all-categories">
+        <a href="#" class="mb-4">
+            <div class="col">
+                <div class="category">
+                  <img src="{% static 'helpers/images/Books/The water cure.jpg' %}" class="category-list" alt="...">
+                  <h5 class="text-center">Novel</h5>
+              </div>
+            </div>
+        </a>
+        <a href="#" class="mb-4">
+            <div class="col">
+                <div class="category">
+                  <img src="{% static 'helpers/images/Books/The war of the worlds.jpg' %}" class="  category-list" alt="...">
+                  <h5 class="text-center">Story</h5>
+              </div>
+            </div>
+        </a>
+        <a href="#" class="mb-4">
+            <div class="col">
+                <div class="category">
+                  <img src="{% static 'helpers/images/Books/The King of Drugs.jpg' %}" class="  category-list" alt="...">
+                  <h5 class="text-center">Documentary</h5>
+              </div>
+            </div>
+        </a>
+        <a href="#" class="mb-4">
+            <div class="col">
+                <div class="category">
+                  <img src="{% static 'helpers/images/Books/The Great Gatsby.jpg' %}" class="  category-list" alt="...">
+                  <h5 class="text-center">Biology</h5>
+              </div>
+            </div>
+        </a>
+        <a href="#" class="mb-4">
+            <div class="col">
+                <div class="category">
+                  <img src="{% static 'helpers/images/Books/Sugar run.jpg' %}" class="  category-list" alt="...">
+                  <h5 class="text-center">Finance</h5>
+              </div>
+            </div>
+        </a>
+        <a href="#" class="mb-4">
+            <div class="col">
+                <div class="category">
+                  <img src="{% static 'helpers/images/Books/Richdad.jpg' %}" class="  category-list" alt="...">
+                  <h5 class="text-center">Play</h5>
+              </div>
+            </div>
+        </a>
+        <a href="#" class="mb-4">
+            <div class="col">
+                <div class="category">
+                  <img src="{% static 'helpers/images/Books/Moral Compass.jpg' %}" class="  category-list" alt="...">
+                  <h5 class="text-center">Adventure</h5>
+              </div>
+            </div>
+        </a>
+        <a href="#" class="mb-4">
+            <div class="col">
+                <div class="category">
+                  <img src="{% static 'helpers/images/Books/Memory.jpg' %}" class="category-list" alt="...">
+                  <h5 class="text-center">Love</h5>
+              </div>
+            </div>
+        </a>
+        <a href="#" class="mb-4">
+            <div class="col">
+                <div class="category">
+                  <img src="{% static 'helpers/images/Books/Book Cover Guideline.jpg' %}" class="category-list" alt="...">
+                  <h5 class="text-center">Religion</h5>
+              </div>
+            </div>
+        </a>
+        <a href="#" class="mb-4">
+            <div class="col">
+                <div class="category">
+                  <img src="{% static 'helpers/images/Books/Beautiful Creatures.jpg' %}" class="category-list" alt="...">
+                  <h5 class="text-center">Business</h5>
+              </div>
+            </div>
+        </a>
+        <a href="#" class="mb-4">
+            <div class="col">
+                <div class="category">
+                  <img src="{% static 'helpers/images/Books/Amara the Brave.webp' %}" class="  category-list" alt="...">
+                  <h5 class="text-center">Politics</h5>
+              </div>
+            </div>
+        </a>
+      </div>
+      {% endif %}
+
+        <div class="mt-5">
+            <div class="container-fluid">
+                <div class="row mb-5 ml-5">
+                <div class="col-xs-12 col-lg-12 col-md-12 col-sm-12">
+                    <div aria-label="Page navigation example" class="paginator">
+                        <ul class="pagination">
+                            <li class="page-item"><a href="#" class="page-link">Previous</a></li>
+                            <li class="page-item"><a href="#" class="page-link">1</a></li>
+                            <li class="page-item"><a href="#" class="page-link">2</a></li>
+                            <li class="page-item"><a href="#" class="page-link">3</a></li>
+                            <li class="page-item"><a href="#" class="page-link">Next</a></li>
+                        </ul>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock content  %}

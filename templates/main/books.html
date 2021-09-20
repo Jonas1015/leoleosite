@@ -1,0 +1,135 @@
+{%  extends 'main/base.html' %}
+{% block title  %} Books {% endblock title %}
+{% load static %}
+{% block search %}
+<form class="d-flex">
+    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success" type="submit">Search</button>
+</form>
+{% endblock search %}
+{% block content  %}
+
+    <div class="container p-0 mt-5 mb-5">
+      <div class="header mb-lg-5">
+        <h2 class="text-center">ALL BOOKS</h2>
+      </div>
+      {% if books %}
+      <div class="row row-cols-2 row-cols-lg-4 row-cols-md-3 g-4">
+        {% for book in books %}
+        <a href="{% url 'book' book.id %}">
+            <div class="col">
+                <div class="card image-card">
+                  <img src="{{book.image.url}}" class="card-img-top image-list" alt="{{book.name}}">
+              </div>
+            </div>
+        </a>
+        {% endfor %}
+        </div>
+        {% else %}
+        <div class="row row-cols-2 row-cols-lg-4 row-cols-md-3 g-4">
+          <a href="{% url 'book' 1 %}">
+            <div class="col">
+              <div class="card image-card">
+                <img src="{% static 'helpers/images/Books/Think.jpg' %}" class="card-img-top image-list" alt="...">
+              </div>
+            </div>
+          </a>
+          <a href="#">
+              <div class="col">
+                  <div class="card image-card">
+                    <img src="{% static 'helpers/images/Books/The water cure.jpg' %}" class="card-img-top image-list" alt="...">
+                </div>
+              </div>
+          </a>
+        <a href="#">
+            <div class="col">
+                <div class="card image-card">
+                  <img src="{% static 'helpers/images/Books/The war of the worlds.jpg' %}" class="card-img-top image-list" alt="...">
+              </div>
+            </div>
+        </a>
+        <a href="#">
+            <div class="col">
+                <div class="card image-card">
+                  <img src="{% static 'helpers/images/Books/The King of Drugs.jpg' %}" class="card-img-top image-list" alt="...">
+              </div>
+            </div>
+        </a>
+        <a href="#">
+            <div class="col">
+                <div class="card image-card">
+                  <img src="{% static 'helpers/images/Books/The Great Gatsby.jpg' %}" class="card-img-top image-list" alt="...">
+              </div>
+            </div>
+        </a>
+        <a href="#">
+            <div class="col">
+                <div class="card image-card">
+                  <img src="{% static 'helpers/images/Books/Sugar run.jpg' %}" class="card-img-top image-list" alt="...">
+              </div>
+            </div>
+        </a>
+        <a href="#">
+            <div class="col">
+                <div class="card image-card">
+                  <img src="{% static 'helpers/images/Books/Richdad.jpg' %}" class="card-img-top image-list" alt="...">
+              </div>
+            </div>
+        </a>
+        <a href="#">
+            <div class="col">
+                <div class="card image-card">
+                  <img src="{% static 'helpers/images/Books/Moral Compass.jpg' %}" class="card-img-top image-list" alt="...">
+              </div>
+            </div>
+        </a>
+        <a href="#">
+            <div class="col">
+                <div class="card image-card">
+                  <img src="{% static 'helpers/images/Books/Memory.jpg' %}" class="card-img-top image-list" alt="...">
+              </div>
+            </div>
+        </a>
+        <a href="#">
+            <div class="col">
+                <div class="card image-card">
+                  <img src="{% static 'helpers/images/Books/Book Cover Guideline.jpg' %}" class="card-img-top image-list" alt="...">
+              </div>
+            </div>
+        </a>
+        <a href="#">
+            <div class="col">
+                <div class="card image-card">
+                  <img src="{% static 'helpers/images/Books/Beautiful Creatures.jpg' %}" class="card-img-top image-list" alt="...">
+              </div>
+            </div>
+        </a>
+        <a href="#">
+            <div class="col">
+                <div class="card image-card">
+                  <img src="{% static 'helpers/images/Books/Amara the Brave.webp' %}" class="card-img-top image-list" alt="...">
+              </div>
+            </div>
+        </a>
+      </div>
+      {% endif %}
+
+        <div class="mt-5">
+            <div class="container-fluid">
+                <div class="row mb-5 ml-5">
+                <div class="col-xs-12 col-lg-12 col-md-12 col-sm-12">
+                    <div aria-label="Page navigation example" class="paginator">
+                        <ul class="pagination">
+                            <li class="page-item"><a href="#" class="page-link">Previous</a></li>
+                            <li class="page-item"><a href="#" class="page-link">1</a></li>
+                            <li class="page-item"><a href="#" class="page-link">2</a></li>
+                            <li class="page-item"><a href="#" class="page-link">3</a></li>
+                            <li class="page-item"><a href="#" class="page-link">Next</a></li>
+                        </ul>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock content  %}

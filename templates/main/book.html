@@ -1,0 +1,238 @@
+{%  extends 'main/base.html' %}
+{% block title  %} Homepage {% endblock title  %}
+{% load static %}
+{% block search %}{% endblock search %}
+{% block content  %}
+<div class="container mt-5 mb-5">
+
+      {% if book %}
+      <div class="row row-cols-2 row-cols-sm-2 row-cols-lg-2 row-cols-md-2 g-4">
+        <div class="col-md-3 col-sm-4 col-xs-4 offset-xs-4">
+            <div class="card">
+                <img src="{{ book.image.url }}" class="card-img-top image-list" alt="{{ book.name }}">
+            </div>
+        </div>
+        <div class="col-xs-8 col-md-8">
+            <div class="about">
+                <h6>Author: <br>  {{book.author}}</h6>
+                <h6>Publisher: <br>{{book.publisher}}</h6>
+                <h6>Year: <br>{{book.year}}</h6>
+                <h6>ISBN Number: <br>{{book.isbn}}</h6>
+                <hr>
+                <a href="{% url 'download-book' book.id %}" class="btn btn-outline-success">Download Now</a>
+            </div>
+        </div>
+        </div>
+        <div class="row row-cols-1">
+          <div class="pl-4 pr-4">
+            <div class="content ">
+              <h3 class="text-center">{{ book.name }}</h3>
+              <span> <h6 class="text-center">By {{ book.author }}</h6></span>
+              <p>{{book.description|linebreaks}}</p>
+            </div>
+          </div>
+        </div>
+        {% else %}
+        <div class="row row-cols-2 row-cols-sm-2 row-cols-lg-2 row-cols-md-2 g-4">
+          <div class="col-md-3 col-sm-4 col-xs-4 offset-xs-4">
+              <div class="card">
+                  <img src="{% static 'helpers/images/Books/Think.jpg' %}" class="card-img-top image-list" alt="...">
+              </div>
+          </div>
+          <div class="col-xs-8 col-md-8">
+              <div class="about">
+                  <h6>Author: <br>  Napoleon Hill</h6>
+                  <h6>Publisher: <br>Global Publishers Limited</h6>
+                  <h6>Year: <br>2008</h6>
+                  <h6>ISBN Number: <br>IASJSI8767654678</h6>
+              </div>
+          </div>
+        </div>
+        <div class="row row-cols-1">
+            <div class="pl-4 pr-4">
+                <div class="content ">
+                    <h3 class="text-center">Think and Grow Rich</h3>
+                    <span> <h6 class="text-center">By Napoleon Hill</h6></span>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt ipsa, aperiam tenetur neque iusto tempora magnam cupiditate dolores sed provident et quo facere accusamus ea nobis, corporis ratione reiciendis. Sunt.</p>
+                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fuga, voluptatem reiciendis! Atque quibusdam neque illo expedita at fugit ex temporibus excepturi, eius, rerum quas ut facilis suscipit. Harum, exercitationem ad.</p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates mollitia quia excepturi ullam ducimus, harum deserunt perferendis quas tempora quibusdam incidunt quod quos! Odio, eius. Consequatur eaque cupiditate earum quos.</p>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+
+    <hr>
+
+    <!-- Similar Books -->
+    <div class="section-headers d-flex">
+        <h4 class="header-left">Similar Books</h4>
+    </div>
+    {% if similar_books %}
+      <div class="popular-books-owl owl-carousel owl-theme">
+        {% for similar_book in similar_books %}
+          {% if similar_book != book %}
+          <div class="ms-2 me-2">
+              <div class="card">
+                      <img data-src="{{similar_book.image.url}}" class="card-img-top owl-lazy" alt="{{similar_book.name}}">
+              </div>
+          </div>
+          {% endif %}
+
+        {% endfor %}
+      </div>
+      {% else %}
+      <div class="popular-books-owl owl-carousel owl-theme">
+        <div class="ms-2 me-2">
+            <div class="card">
+                <img data-src="{% static 'helpers/images/Books/Richdad.jpg' %}" class="card-img-top owl-lazy" alt="">
+            </div>
+        </div>
+        <div class="ms-2 me-2">
+            <div class="card">
+                <img data-src="{% static 'helpers/images/Books/Sugar run.jpg' %}" class="card-img-top owl-lazy" alt="">
+            </div>
+        </div>
+        <div class="ms-2 me-2">
+            <div class="card">
+                <img data-src="{% static 'helpers/images/Books/Moral Compass.jpg' %}" class="card-img-top owl-lazy" alt="">
+            </div>
+        </div>
+        <div class="ms-2 me-2">
+            <div class="card">
+                <img data-src="{% static 'helpers/images/Books/Amara the Brave.webp' %}" class="card-img-top owl-lazy" alt="">
+            </div>
+        </div>
+        <div class="ms-2 me-2">
+            <div class="card">
+                <img data-src="{% static 'helpers/images/Books/Agnes and the end of the world.webp' %}" class="card-img-top owl-lazy" alt="">
+            </div>
+        </div>
+        <div class="ms-2 me-2">
+            <div class="card">
+                <img data-src="{% static 'helpers/images/Books/Beautiful Creatures.jpg' %}" class="card-img-top owl-lazy" alt="">
+            </div>
+        </div>
+        <div class="ms-2 me-2">
+            <div class="card">
+                    <img data-src="{% static 'helpers/images/Books/Very nice.jpg' %}" class="card-img-top owl-lazy" alt="">
+            </div>
+        </div>
+        <div class="ms-2 me-2">
+            <div class="card">
+                <img data-src="{% static 'helpers/images/Books/Book Cover Guideline.jpg' %}" class="card-img-top owl-lazy" alt="">
+            </div>
+        </div>
+        <div class="ms-2 me-2">
+            <div class="card">
+                <img data-src="{% static 'helpers/images/Books/Memory.jpg' %}" class="card-img-top owl-lazy" alt="">
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    <!-- End of books slider -->
+</div>
+
+{% endblock content  %}
+
+
+
+    <!-- Footer -->
+    <footer class="text-center text-lg-start bg-light text-muted">
+    {% block footer  %}
+    <!-- Section: Social media -->
+    <!-- <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom"> -->
+        <!-- Left -->
+        <!-- <div class="me-5 d-none d-lg-block">
+        <span>Get connected with us on social networks:</span>
+        </div> -->
+        <!-- Left -->
+
+        <!-- Right -->
+        <!-- <div>
+        <a href="" class="me-4 text-reset">
+            <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="" class="me-4 text-reset">
+            <i class="fab fa-twitter"></i>
+        </a>
+        <a href="" class="me-4 text-reset">
+            <i class="fab fa-google"></i>
+        </a>
+        <a href="" class="me-4 text-reset">
+            <i class="fab fa-instagram"></i>
+        </a>
+        <a href="" class="me-4 text-reset">
+            <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="" class="me-4 text-reset">
+            <i class="fab fa-github"></i>
+        </a>
+        </div> -->
+        <!-- Right -->
+    <!-- </section> -->
+    <!-- Section: Social media -->
+
+    <!-- Section: Links  -->
+    <section class="">
+        <div class="container text-center text-md-start mt-5">
+        <!-- Grid row -->
+        <div class="row mt-3">
+            <!-- Grid column -->
+            <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+            <!-- Content -->
+            <h6 class="text-uppercase fw-bold mb-4">
+                <i class="fas fa-gem me-3"></i>LeoLeo Library
+            </h6>
+            <p>
+                Here you can download books for free as much as you want. Welcome and you can click the link below to donate.
+               <br>
+                <a href="#" class="btn btn-outline-success mt-4"> DONATE NOW</a>
+            </p>
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold mb-4">
+                Useful links
+            </h6>
+            <p>
+                <a href="{% url 'add-book' %}" class="text-reset">Admin</a>
+            </p>
+            <p>
+                <a href="{% url 'books' %}" class="text-reset">Books</a>
+            </p>
+            <p>
+                <a href="#!" class="text-reset">Help</a>
+            </p>
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold mb-4">
+                Contact
+            </h6>
+            <p><i class="fas fa-home me-3"></i> Samora AV, SA 10012, TZ</p>
+            <p>
+                <i class="fas fa-envelope me-3"></i>
+                leoleocompany@leoleo.com
+            </p>
+            <p><i class="fas fa-phone me-3"></i> + 255 767 835 587</p>
+            <p><i class="fas fa-phone me-3"></i> + 255 739 835 587</p>
+            <p><i class="fas fa-phone me-3"></i> + 255 778 127 297</p>
+            </div>
+            <!-- Grid column -->
+        </div>
+        <!-- Grid row -->
+        </div>
+    </section>
+    <!-- Section: Links  -->
+
+    <!-- Copyright -->
+    {% endblock footer  %}
