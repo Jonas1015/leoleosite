@@ -1,5 +1,5 @@
-{% extends 'main/base.html' %}
-{% load crispy_forms_tags %}
+{% extends 'main/base2.html' %}
+{% load widget_tweaks %}
 {% block title %} Update User {% endblock %}
 {% block content %}
 <div class="outer_container">
@@ -13,10 +13,18 @@
           <div class="login_form w3-card pb-1 pr-5 pl-5">
               <form method="POST" class="form-group pt-5 ">
                 {% csrf_token %}
-                  {{ form| crispy }}
+                {% for field in form.visible_fields %}
+                  <div class="form-group">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field|add_class:'form-control' }}
+                    {% for error in field.errors %}
+                      <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                  </div>
+                {% endfor %}
 
                   <div class="form-group mt-5">
-                    <button class="btn btn-block text-white" type="submit">Update</button>
+                    <button class="btn btn-block btn-outline-info" type="submit">Update</button>
                   </div>
               </form>
             </div>

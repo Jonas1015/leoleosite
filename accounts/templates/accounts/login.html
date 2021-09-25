@@ -1,5 +1,5 @@
-{% extends 'main/base.html' %}
-{% load crispy_forms_tags %}
+{% extends 'main/base2.html' %}
+{% load widget_tweaks %}
 {% block title %} login {% endblock %}
 {% load static %}
 {% block content %}
@@ -18,11 +18,19 @@
               </div>
               <hr>
               <form method="POST" class="form-group">
-                {% csrf_token %}
-                  {{ form| crispy }}
+                  {% csrf_token %}
+                  {% for field in form.visible_fields %}
+                    <div class="form-group">
+                      <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                      {{ field|add_class:'form-control' }}
+                      {% for error in field.errors %}
+                        <span class="help-block">{{ error }}</span>
+                      {% endfor %}
+                    </div>
+                  {% endfor %}
                   <div class="form-group mt-5">
-                    <button class="btn button btn-block" type="submit">Login</button>
-                    <!-- <a href="{% url 'password_reset' %}"> forgot password?</a> -->
+                    <button class="btn btn-outline-info btn-block" type="submit">Login</button>
+                    <a href="{% url 'password_reset' %}"> forgot password?</a>
                   </div>
               </form>
           </div>

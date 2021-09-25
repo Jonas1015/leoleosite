@@ -33,7 +33,7 @@ def books(request):
         books_list = Book.objects.filter(Q(name__icontains = search_term)|Q(author__icontains = search_term)).order_by('-id')
         if not books_list:
             books_list = Book.objects.all().order_by('-id')
-            messages.warning(request, f'Query Not Found')
+            messages.warning(request, f'Book Not Found')
 
     page = request.GET.get('page', 1)
 
@@ -56,10 +56,10 @@ def categories(request):
 
     if request.GET.get('search_term'):
         search_term = request.GET.get('search_term')
-        categories_list = Book.objects.filter(Q(name__icontains = search_term)).order_by('-id')
-        if not books_list:
-            categories_list = Book.objects.all().order_by('-id')
-            messages.warning(request, f'Query Not Found')
+        categories_list = Category.objects.filter(Q(name__icontains = search_term)).order_by('-id')
+        if not categories_list:
+            categories_list = Category.objects.all().order_by('-id')
+            messages.warning(request, f'Category Not Found')
 
     page = request.GET.get('page', 1)
 
@@ -83,10 +83,10 @@ def category_books(request, id):
 
     if request.GET.get('search_term'):
         search_term = request.GET.get('search_term')
-        books_list = Book.objects.filter(Q(name__icontains = search_term)|Q(author__icontains = search_term)).order_by('-id')
+        books_list = Book.objects.filter(Q(name__icontains = search_term)|Q(author__icontains = search_term), category = category).order_by('-id')
         if not books_list:
-            books_list = Book.objects.all().order_by('-id')
-            messages.warning(request, f'Query Not Found')
+            books_list = Book.objects.filter(category = category).order_by('-id')
+            messages.warning(request, f'Book Not Found')
 
     page = request.GET.get('page', 1)
 
