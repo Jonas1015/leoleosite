@@ -33,7 +33,6 @@ class CustomUserManager(BaseUserManager):
             last_name = last_name
         )
         user.is_active = True
-        user.is_shopkeeper = True
         user.is_admin = True
         user.is_superuser = True
         user.save(using=self._db)
@@ -62,7 +61,6 @@ class CustomUser(AbstractBaseUser):
     is_active = models.BooleanField(default=True)
     is_superuser = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
-    is_shopkeeper = models.BooleanField(default=False)
 
 
     objects = CustomUserManager()
@@ -96,21 +94,6 @@ def profile_pic_filename(instance, filename):
     new_filename = '{}.{}'.format(uuid4(), ext)
     return f'profile_pics/{instance.user_id}/{new_filename}'
 
-
-class ShopKeeperProfile(models.Model):
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, primary_key=True)
-    phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number entered was not correctly formated.")
-    phone_number = models.CharField(validators=[phone_regex], max_length=17, blank=True) # validators should be a list
-    profile_pic = models.ImageField(verbose_name='Profile Picture', default='default.jpg', upload_to=profile_pic_filename)
-
-    def __str__(self):
-        return f'{self.user.first_name} {self.user.last_name} Profile'
-
-    def get_absolute_url(self):
-        return reverse('accounts:shopkeeper-profile', kwargs={'pk': self.user_id})
-
-    def get_profile_update_url(self):
-        return reverse('accounts:shopkeeper-profile-update', kwargs={'pk': self.user_id})
 
 
 class AdminProfile(models.Model):

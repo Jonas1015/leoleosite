@@ -72,11 +72,13 @@
       <div class="popular-books-owl owl-carousel owl-theme">
         {% for similar_book in similar_books %}
           {% if similar_book != book %}
-          <div class="ms-2 me-2">
+          <a href="{% url 'book' similar_book.id %}">
+            <div class="ms-2 me-2">
               <div class="card">
-                      <img data-src="{{similar_book.image.url}}" class="card-img-top owl-lazy" alt="{{similar_book.name}}">
+                <img data-src="{{similar_book.image.url}}" class="card-img-top owl-lazy" alt="{{similar_book.name}}">
               </div>
-          </div>
+            </div>
+          </a>
           {% endif %}
 
         {% endfor %}

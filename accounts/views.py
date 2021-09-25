@@ -123,8 +123,6 @@ def ProfileView(request):
 
     if request.user.is_admin:
         profile = AdminProfile.objects.get(user = request.user)
-    elif request.user.is_shopkeeper:
-        profile = ShopKeeperProfile.objects.get(user = request.user)
     # elif request.user.is_officer:
     #     profile = OfficerProfile.objects.get(user = request.user)
     else:
@@ -149,10 +147,6 @@ def ProfileUpdateView(request):
         profile_form = AdminProfileUpdateForm(instance = request.user.adminprofile)
         profile = AdminProfile.objects.get(user = request.user)
 
-    elif request.user.is_shopkeeper:
-        profile_form = ShopKeeperProfileUpdateForm(instance = request.user.shopkeeperprofile)
-        profile = ShopKeeperProfile.objects.get(user = request.user)
-
     # elif request.user.is_officer:
     #     profile_form = OfficerProfileUpdateForm(instance = request.user.officerprofile)
     #     profile = OfficerProfile.objects.get(user = request.user)
@@ -170,10 +164,6 @@ def ProfileUpdateView(request):
                                         instance = request.user.adminprofile)
             profile = AdminProfile.objects.get(user = request.user)
 
-        elif request.user.is_shopkeeper:
-            profile_form = ShopKeeperProfileUpdateForm(request.POST,
-                                        request.FILES, instance = request.user.shopkeeperprofile)
-            profile = ShopKeeperProfile.objects.get(user = request.user)
         # elif request.user.is_officer:
         #     profile_form = OfficerProfileUpdateForm(request.POST,
         #                                 request.FILES, instance = request.user.officerprofile)
@@ -184,8 +174,6 @@ def ProfileUpdateView(request):
         if profile_form.is_valid() and user_form.is_valid():
             if request.user.is_admin:
                 profiles = AdminProfile.objects.all()
-            elif request.user.is_shopkeeper:
-                profiles = ShopKeeperProfile.objects.all()
             # elif request.user.is_officer:
             #     profiles = OfficerProfile.objects.all()
             for profile in profiles:

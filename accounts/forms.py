@@ -34,12 +34,6 @@ class userUpdatingForm(forms.ModelForm):
         fields = ['first_name', 'last_name', 'username', 'email', 'is_active']
 
 
-class ShopKeeperProfileUpdateForm(forms.ModelForm):
-
-    class Meta:
-        model = ShopKeeperProfile
-        fields = ['phone_number', 'profile_pic' ]
-
 
 class UserUpdateForm(forms.ModelForm):
     class Meta:
