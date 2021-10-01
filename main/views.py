@@ -52,7 +52,7 @@ def books(request):
     return render(request, template_name, context)
 
 def categories(request):
-    categories_list = Book.objects.all().order_by('-id')
+    categories_list = Category.objects.all().order_by('-id')
 
     if request.GET.get('search_term'):
         search_term = request.GET.get('search_term')
@@ -147,15 +147,9 @@ def contact(request):
     template_name = 'main/contact.html'
     return render(request, template_name, context)
 
-
-def addBook(request):
-    context = {}
-    template_name = 'main/addBook.html'
-    return render(request, template_name, context)
-
-
 # ============================== BOOKS ADMIN ======================================================
 
+@login_required
 def allBooks(request):
     books_list = Book.objects.all().order_by('-id')
     categories = Category.objects.all()
@@ -183,7 +177,7 @@ def allBooks(request):
     template_name = 'main/allBooks.html'
     return render(request, template_name, context)
 
-
+@login_required
 def add_book(request):
     if request.method == "POST" and request.FILES:
         name = request.POST.get('name')
@@ -228,7 +222,7 @@ def add_book(request):
     messages.error(request, f'Error occured while saving your data!', extra_tags = "alert alert-danger")
     return redirect('allBooks')
 
-
+@login_required
 def update_book(request, id):
     if request.method == "POST":
         name = request.POST.get('name')
@@ -276,7 +270,7 @@ def update_book(request, id):
     messages.error(request, f'Error Occured while updating your data!', extra_tags = "alert alert-danger")
     return redirect('allBooks')
 
-
+@login_required
 def delete_book(request, id):
     book = get_object_or_404(Book, id = id)
     book.delete()
@@ -285,7 +279,7 @@ def delete_book(request, id):
 
 
 # ==================== CATEGORY ADMIN =========================================================
-
+@login_required
 def allCategories(request):
     categories_list = Category.objects.all().order_by('-id')
 
@@ -311,7 +305,7 @@ def allCategories(request):
     template_name = 'main/allCategories.html'
     return render(request, template_name, context)
 
-
+@login_required
 def add_category(request):
     if request.method == "POST":
         name = request.POST.get('name')
@@ -327,7 +321,7 @@ def add_category(request):
     messages.error(request, f'Error occured while saving your data!', extra_tags = "alert alert-danger")
     return redirect('allCategories')
 
-
+@login_required
 def update_category(request, id):
     if request.method == "POST":
         name = request.POST.get('name')
@@ -344,9 +338,9 @@ def update_category(request, id):
     messages.error(request, f'Error Occured while updating your data!', extra_tags = "alert alert-danger")
     return redirect('allCategories')
 
-
+@login_required
 def delete_category(request, id):
-    Category = get_object_or_404(Category, id = id)
-    Category.delete()
+    category = get_object_or_404(Category, id = id)
+    category.delete()
     messages.success(request, f'Category Deleted Successfully!')
     return redirect('allCategories')

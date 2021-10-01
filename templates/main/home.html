@@ -267,8 +267,53 @@
         <p>
             Here you can download books for free as much as you want. Welcome and you can click the link below to donate.
            <br>
-            <a href="#" class="btn btn-outline-success mt-4"> DONATE NOW</a>
+            <!-- Button trigger modal -->
+              <button type="button" class="btn btn-outline-success mt-4" data-bs-toggle="modal" data-bs-target="#donateModal">
+                DONATE NOW
+              </button>
+
+              <!-- Modal -->
+              <div class="modal fade" id="donateModal" tabindex="-1" aria-labelledby=donateModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="donateModalLabel">DONATE NOW</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <h5>Account Number:</h5>
+                      <p><strong>12343245678</strong> - LeoLeo Library | CRDB</p>
+                      <h3>Phone Number</h3>
+                      <p><strong>076543321</strong> - LeoLeo Library | M-Pesa</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
         </p>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="donateModal" tabindex="-1" aria-labelledby="donateModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title text-dark" id="donateModalLabel">DONATE NOW</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                      <h3>Account Number:</h3>
+                      <p>12343245678 LeoLeo Library - CRDB</p>
+                      <h3>Phone Number</h3>
+                      <p>076543321 LeoLeo Library - M-Pesa</p>
+
+              </div>
+            </div>
+          </div>
         </div>
         <!-- Grid column -->
 
@@ -281,13 +326,20 @@
             Useful links
         </h6>
         <p>
-            <a href="{% url 'add-book' %}" class="text-reset">Admin</a>
+            {% if request.user.is_authenticated %}
+            <a href="{% url 'change-password' %}" class="text-reset">Change Password</a>
+            {% else %}
+            <a href="{% url 'login' %}" class="text-reset">Admin</a>
+            {% endif %}
         </p>
         <p>
             <a href="{% url 'books' %}" class="text-reset">Books</a>
         </p>
         <p>
-            <a href="#!" class="text-reset">Help</a>
+            <a href="{% url 'about' %}" class="text-reset">About Us</a>
+        </p>
+        <p>
+            <a href="{% url 'contact' %}" class="text-reset">Contact Us</a>
         </p>
         </div>
         <!-- Grid column -->

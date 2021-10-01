@@ -14,6 +14,7 @@ Template 2101 Insertion
 http://www.tooplate.com/view/2101-insertion
 
 -->
+  <link rel="icon" href="{% static 'img/Logo/logo2.png' %}" type="image/png" />
   <!-- load CSS -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400">        <!-- Google web font "Open Sans" -->
   <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %} ">                                            <!-- https://getbootstrap.com/ -->
@@ -64,9 +65,10 @@ http://www.tooplate.com/view/2101-insertion
               </ul>
             </nav> -->
             <nav class="navbar navbar-expand-sm">
-              <a class="navbar-brand text-white" href="#">
+              <!-- <a class="navbar-brand text-white" href="#">
                 LEOLEO <br> LIBRARY
-              </a>
+              </a> -->
+              <a class="navbar-brand" href="{% url 'home' %}"><img class="logo" style="width:4vw; height: 6vh;" src="{% static 'img/Logo/logo2.png' %}"></a>
               <a type="button" id="navbarCollapse" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation" class="navbar-btn active">
                 <span></span>
                 <span></span>
@@ -76,18 +78,6 @@ http://www.tooplate.com/view/2101-insertion
                 <ul class="navbar-nav">
                   <li class="nav-item active">
                     <a href="{% url 'home' %}" class="nav-link text-white">Home</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="{% url 'books' %}" class="nav-link text-white">Books</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="{% url 'categories' %}" class="nav-link text-white">Categories</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="{% url 'about' %}" class="nav-link text-white">About</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="{% url 'contact' %}" class="nav-link text-white">Contact</a>
                   </li>
                   <li class="nav-item">
                     <a href="{% url 'allBooks' %}" class="nav-link text-white">Manage Books</a>
